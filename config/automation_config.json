@@ -1,0 +1,162 @@
+{
+  "web_scraping": {
+    "parallel_workers": 4,
+    "timeout_seconds": 30,
+    "retry_attempts": 3,
+    "retry_delay_seconds": 10,
+    "user_agent": "Mozilla/5.0 (Gov-Sales-Agent/2.0) Chrome/120.0.0.0",
+    "headers": {
+      "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Language": "ja,en;q=0.9",
+      "Accept-Encoding": "gzip, deflate, br"
+    },
+    "target_patterns": {
+      "plans": ["/shisei/keikaku/", "/keikaku/", "/plan/"],
+      "budget": ["/shisei/yosan/", "/yosan/", "/budget/"],
+      "minutes": ["/shisei/gikai/", "/gikai/", "/council/"],
+      "organization": ["/shisei/soshiki/", "/soshiki/", "/organization/"],
+      "digital": ["/shisei/digital/", "/dx/", "/digital/", "/ict/"]
+    },
+    "file_types": [".pdf", ".xlsx", ".docx", ".csv"],
+    "max_file_size_mb": 50,
+    "download_directory": "./data/downloads/"
+  },
+  
+  "pdf_processing": {
+    "ocr_enabled": true,
+    "ocr_languages": ["jpn", "eng"],
+    "ocr_dpi": 300,
+    "image_enhancement": true,
+    "text_extraction_method": "pdfplumber",
+    "fallback_methods": ["pypdf2", "ocr"],
+    "table_extraction": true,
+    "max_pages_per_batch": 50,
+    "parallel_processing": true,
+    "cache_extracted_text": true,
+    "cache_directory": "./data/cache/pdf/"
+  },
+  
+  "analysis": {
+    "batch_size": 10,
+    "cache_enabled": true,
+    "cache_ttl_hours": 168,
+    "parallel_analysis": true,
+    "max_workers": 4,
+    "keyword_extraction": {
+      "enabled": true,
+      "min_frequency": 2,
+      "max_keywords": 50,
+      "ignore_common_words": true
+    },
+    "entity_extraction": {
+      "enabled": true,
+      "types": ["person", "organization", "money", "date", "percentage"],
+      "confidence_threshold": 0.8
+    },
+    "sentiment_analysis": {
+      "enabled": false,
+      "model": "default"
+    },
+    "ml_models": {
+      "entity_extraction": "models/ner_v2.pkl",
+      "classification": "models/doc_classifier_v2.pkl",
+      "relevance_scoring": "models/relevance_scorer_v2.pkl"
+    }
+  },
+  
+  "document_storage": {
+    "structured_data_format": "json",
+    "compression_enabled": true,
+    "deduplication": true,
+    "version_control": true,
+    "metadata_extraction": true,
+    "index_creation": true,
+    "full_text_search": true
+  },
+  
+  "reporting": {
+    "auto_generate": true,
+    "template_engine": "jinja2",
+    "output_formats": ["html", "pdf", "docx", "markdown"],
+    "include_visualizations": true,
+    "chart_library": "plotly",
+    "executive_summary": {
+      "enabled": true,
+      "max_length": 500,
+      "key_points": 5
+    },
+    "evidence_citations": {
+      "format": "footnote",
+      "include_page_numbers": true,
+      "include_quotes": true,
+      "max_quote_length": 100
+    }
+  },
+  
+  "quality_assurance": {
+    "auto_validation": true,
+    "validation_rules": [
+      "evidence_completeness",
+      "logical_consistency",
+      "numerical_accuracy",
+      "citation_validity"
+    ],
+    "min_quality_score": 0.8,
+    "require_human_review": false,
+    "review_threshold": 0.85
+  },
+  
+  "scheduling": {
+    "enabled": true,
+    "default_schedule": "0 6 * * 1",
+    "time_zone": "Asia/Tokyo",
+    "concurrent_jobs": 3,
+    "job_timeout_hours": 4,
+    "notification_email": "",
+    "slack_webhook": ""
+  },
+  
+  "performance": {
+    "enable_profiling": false,
+    "log_level": "INFO",
+    "max_memory_gb": 4,
+    "disk_space_warning_gb": 10,
+    "cleanup_old_files_days": 30,
+    "optimize_database_weekly": true
+  },
+  
+  "integration": {
+    "google_drive": {
+      "enabled": false,
+      "folder_id": "",
+      "sync_interval_hours": 24
+    },
+    "sharepoint": {
+      "enabled": false,
+      "site_url": "",
+      "library_name": ""
+    },
+    "email": {
+      "enabled": false,
+      "smtp_server": "",
+      "smtp_port": 587,
+      "use_tls": true
+    }
+  },
+  
+  "security": {
+    "enable_encryption": false,
+    "audit_logging": true,
+    "pii_detection": true,
+    "pii_masking": true,
+    "allowed_domains": [
+      "*.lg.jp",
+      "*.go.jp"
+    ],
+    "blocked_patterns": [
+      "password",
+      "secret",
+      "confidential"
+    ]
+  }
+}

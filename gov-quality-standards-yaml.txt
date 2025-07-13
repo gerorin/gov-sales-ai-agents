@@ -1,0 +1,108 @@
+# 自治体営業支援システム v2.0
+# 品質基準設定ファイル
+
+quality_standards:
+  # 証明品質基準
+  evidence:
+    min_confidence: 0.8                    # 最低信頼度スコア
+    required_fields:                       # 必須フィールド
+      - document_name                      # 文書名
+      - page_number                        # ページ番号
+      - quote                              # 引用文
+      - date                              # 取得日
+    max_document_age_days: 365            # 文書の最大経過日数
+    min_quote_length: 20                  # 最小引用文字数
+    max_quote_length: 200                 # 最大引用文字数
+    
+  # 論理的整合性基準
+  consistency:
+    max_contradictions: 0                 # 許容される矛盾数
+    numeric_tolerance: 0.01               # 数値の許容誤差（1%）
+    date_consistency: true                # 日付の整合性チェック
+    budget_validation: true               # 予算額の妥当性検証
+    
+  # 完全性基準
+  completeness:
+    required_departments:                 # 必須分析部署
+      - dx                               # DX推進課
+      - admin                            # 総務課
+      - finance                          # 財政課
+      - planning                         # 企画政策課
+    min_coverage: 0.85                   # 最小カバレッジ率
+    required_sections:                   # 必須セクション
+      - executive_summary                # エグゼクティブサマリー
+      - current_analysis                 # 現状分析
+      - challenges                       # 課題
+      - solutions                        # ソリューション
+      - budget                          # 予算
+      - timeline                        # スケジュール
+      - key_persons                     # キーパーソン
+      
+  # ビジネス関連性基準
+  business_relevance:
+    min_roi_months: 36                   # 最大投資回収期間（月）
+    min_success_probability: 0.6         # 最小成功確率
+    required_risk_analysis: true         # リスク分析必須
+    competitor_analysis: true            # 競合分析必須
+    
+  # プレゼンテーション品質
+  presentation:
+    max_pages: 20                        # 最大ページ数
+    min_visuals: 3                       # 最小図表数
+    readability_score: 0.7               # 可読性スコア
+    executive_summary_max_words: 300     # サマリー最大文字数
+    
+  # 自動化目標
+  automation:
+    target_rate: 0.90                    # 目標自動化率
+    max_human_intervention: 0.10         # 最大人的介入率
+    processing_time_minutes: 120         # 最大処理時間（分）
+    
+# 重み付け設定
+scoring_weights:
+  evidence: 0.30          # 証明品質の重み
+  consistency: 0.25       # 整合性の重み
+  completeness: 0.20      # 完全性の重み
+  relevance: 0.15         # 関連性の重み
+  presentation: 0.10      # プレゼンの重み
+
+# 品質レベル定義
+quality_levels:
+  A:
+    min_score: 0.90
+    label: "優秀"
+    description: "営業提案として即座に使用可能"
+  B:
+    min_score: 0.80
+    label: "良好"
+    description: "軽微な修正で使用可能"
+  C:
+    min_score: 0.70
+    label: "要改善"
+    description: "追加作業が必要"
+  D:
+    min_score: 0.00
+    label: "不適格"
+    description: "大幅な見直しが必要"
+
+# エラー処理設定
+error_handling:
+  missing_evidence:
+    severity: high
+    action: request_additional_collection
+  logical_contradiction:
+    severity: critical
+    action: immediate_review
+  incomplete_section:
+    severity: medium
+    action: auto_fill_template
+  low_quality_score:
+    severity: high
+    action: manual_review_required
+
+# 監査設定
+audit_settings:
+  retain_logs_days: 90                   # ログ保持期間
+  track_all_changes: true                # 全変更履歴を記録
+  require_approval: false                # 承認プロセス
+  notification_threshold: 0.75           # 通知閾値

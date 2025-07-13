@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./agent-send.sh:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(echo:*)",
+      "Bash(cat:*)",
+      "Bash(ls:*)",
+      "Bash(if:*)",
+      "Bash([ -f ./tmp/*_done.txt ]*)",
+      "Bash([ -f ./data/* ]*)",
+      "Bash(*_done.txt*)",
+      "Bash(mkdir:*)",
+      "Bash(then)",
+      "Bash(else)",
+      "Bash(tmux show-options:*)",
+      "Bash(stat:*)",
+      "Bash(date:*)",
+      "Bash(grep:*)",
+      "Bash(awk:*)",
+      "Bash(wc:*)"
+    ],
+    "deny": []
+  }
+}

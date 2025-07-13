@@ -1,0 +1,40 @@
+# ログファイル
+logs/
+*.log
+*.txt
+
+# 一時ファイル
+tmp/
+*.tmp
+*_done.txt
+
+# 収集データ（個人情報・機密情報含む可能性）
+data/
+*.pdf
+*.xlsx
+*.docx
+*.json
+
+# 分析結果（営業情報）
+analysis_results/
+reports/
+
+# OS固有
+.DS_Store
+Thumbs.db
+
+# エディタ
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# バックアップ
+*.bak
+*.backup
+
+# 認証情報
+.env
+credentials/
+tokens/
